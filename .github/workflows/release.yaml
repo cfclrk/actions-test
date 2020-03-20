@@ -29,6 +29,7 @@ jobs:
           ls -alhF
           ls -alhF hello-world/
           file hello-world/actions-test
+          chmod +x hello-world/actions-test
           ./hello-world/actions-test
 
       # - name: Create a GitHub Release
