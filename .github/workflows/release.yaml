@@ -31,11 +31,13 @@ jobs:
       - name: Debug
         run: |
           ls -alhF
+          chmod +x actions-test
           ./actions-test
-          ls -alhF hello-world/
-          file hello-world/actions-test
-          chmod +x hello-world/actions-test
-          ./hello-world/actions-test
+
+     # ls -alhF hello-world/
+     # file hello-world/actions-test
+     # chmod +x hello-world/actions-test
+     # ./hello-world/actions-test
 
       # - name: Create a GitHub Release
       #   id: create_release
