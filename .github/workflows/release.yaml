@@ -20,6 +20,10 @@ jobs:
           name: hello-world
           path: actions-test
 
+      - run: |
+          rm actions-test
+          ls -alhF
+
       - uses: actions/download-artifact@v2-preview
         with:
           name: hello-world
@@ -27,6 +31,7 @@ jobs:
       - name: Debug
         run: |
           ls -alhF
+          ./actions-test
           ls -alhF hello-world/
           file hello-world/actions-test
           chmod +x hello-world/actions-test
