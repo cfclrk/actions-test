@@ -20,10 +20,10 @@ jobs:
       - uses: actions/download-artifact@v2-preview
         with:
           name: foo
+          path: foo
 
       - name: Debug
         run: |
           ls -alhF
-          file actions-test
-          chmod +x actions-test
-          ./actions-test
+          file foo
+          ./foo/actions-test
