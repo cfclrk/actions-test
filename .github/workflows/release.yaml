@@ -10,50 +10,20 @@ jobs:
       - uses: actions/setup-go@v1
         with: {go-version: '1.14'}
 
-      - run: |
-          go build
-          file actions-test
-          ./actions-test
+      - run: go build
 
       - uses: actions/upload-artifact@v2-preview
         with:
-          name: hello-world
+          name: foo
           path: actions-test
-
-      - run: |
-          rm actions-test
-          ls -alhF
 
       - uses: actions/download-artifact@v2-preview
         with:
-          name: hello-world
+          name: foo
 
       - name: Debug
         run: |
           ls -alhF
+          file actions-test
           chmod +x actions-test
           ./actions-test
-
-     # ls -alhF hello-world/
-     # file hello-world/actions-test
-     # chmod +x hello-world/actions-test
-     # ./hello-world/actions-test
-
-      # - name: Create a GitHub Release
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: foo
-      #     release_name: foo
-
-      # - name: Upload binary to GitHub Release
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: ./foo/actions-test
-      #     asset_name: actions-test
-      #     asset_content_type: application/x-executable
