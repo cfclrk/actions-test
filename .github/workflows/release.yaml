@@ -15,12 +15,12 @@ jobs:
           file actions-test
           ./actions-test
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2-preview
         with:
           name: hello-world
           path: actions-test
 
-      - uses: actions/download-artifact@v1
+      - uses: actions/download-artifact@v2-preview
         with:
           name: hello-world
 
