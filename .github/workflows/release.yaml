@@ -20,19 +20,13 @@ jobs:
           name: hello-world
           path: actions-test
 
-      - run: |
-          rm actions-test
-          ls -alhF
-
       - uses: actions/download-artifact@v2-preview
 
       - name: Debug
         run: |
           ls -alhF
-          file hello-world/actions-test
-          tar -xvf hello-world/actions-test
           ls -alhF hello-world/
-          ls -alhF hello-world/actions-test
+          file hello-world/actions-test
 
       # - name: Create a GitHub Release
       #   id: create_release
