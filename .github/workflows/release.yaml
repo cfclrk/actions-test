@@ -15,18 +15,21 @@ jobs:
           file actions-test
           ./actions-test
 
-      - uses: actions/upload-artifact@v2-preview
+      - uses: actions/upload-artifact@v1
         with:
           name: hello-world
           path: actions-test
 
-      - uses: actions/download-artifact@v2-preview
+      - uses: actions/download-artifact@v1
+        with:
+          name: hello-world
 
       - name: Debug
         run: |
           ls -alhF
           ls -alhF hello-world/
           file hello-world/actions-test
+          ./hello-world/actions-test
 
       # - name: Create a GitHub Release
       #   id: create_release
