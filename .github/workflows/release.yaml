@@ -26,4 +26,6 @@ jobs:
         run: |
           ls -alhF
           file foo
+          ls -alhF foo
+          file foo/actions-test
           ./foo/actions-test
