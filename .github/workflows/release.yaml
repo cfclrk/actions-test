@@ -1,0 +1,62 @@
+name: Test artifacts
+on: [push]
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-go@v1
+        with: {go-version: '1.14'}
+
+      - run: |
+          go build
+          file actions-test
+          ./actions-test
+
+      - uses: actions/upload-artifact@v2-preview
+        with:
+          name: actions-test
+          path: actions-test
+
+      - uses: actions/download-artifact@v2-preview
+        with:
+          name: actions-test
+          path: foo/actions-test
+
+      - name: Debug
+        run: |
+          ls -alhF foo
+          file foo/actions-test
+          ./foo/actions-test
+
+      - name: Create a GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: foo
+          release_name: foo
+
+
+      - name: Debug
+        env:
+          RELEASE_URL: ${{ steps.create_release.outputs.upload_url }}
+        run: |
+          ls -alhF foo
+          file foo/actions-test
+          ls -alhF foo/actions-test
+          file foo/actions-test/actions-test
+          echo $RELEASE_URL
+
+      - name: Upload binary to GitHub Release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./foo/actions-test
+          asset_name: actions-test
+          asset_content_type: application/x-executable
