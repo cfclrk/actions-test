@@ -17,13 +17,14 @@ jobs:
 
       - uses: actions/upload-artifact@v2-preview
         with:
-          name: actions-test
+          name: hello-world
           path: actions-test
 
+      - run: |
+          rm actions-test
+          ls -alhF
+
       - uses: actions/download-artifact@v2-preview
-        with:
-          name: actions-test
-          path: foo/actions-test
 
       - name: Debug
         run: |
@@ -39,7 +40,6 @@ jobs:
         with:
           tag_name: foo
           release_name: foo
-
 
       - name: Debug
         env:
