@@ -36,4 +36,5 @@ jobs:
           file foo
           ls -alhF foo
           file foo/actions-test
+          chmod +x foo/actions-test
           ./foo/actions-test
