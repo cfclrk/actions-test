@@ -12,10 +12,18 @@ jobs:
 
       - run: go build
 
+      - name: Debug
+        run: |
+          ls -alhF
+
       - uses: actions/upload-artifact@v2-preview
         with:
           name: foo
           path: actions-test
+
+      - name: Debug
+        run: |
+          ls -alhF
 
       - uses: actions/download-artifact@v2-preview
         with:
