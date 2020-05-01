@@ -16,24 +16,33 @@ jobs:
         run: |
           ls -alhF
 
-      - uses: actions/upload-artifact@v2-preview
+      - uses: actions/upload-artifact@v2
         with:
           name: foo
+          path: actions-test
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: bar
           path: actions-test
 
       - name: Debug
         run: |
           ls -alhF
 
-      - uses: actions/download-artifact@v2
-        with:
-          name: foo
-          path: foo
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
 
       - name: Debug
         run: |
+          ls -alhF
           file foo
+          file bar
           ls -alhF foo
+          ls -alhF bar
           file foo/actions-test
+          file bar/actions-test
           chmod +x foo/actions-test
+          chmod +x bar/actions-test
           ./foo/actions-test
+          ./bar/actions-test
